@@ -50,7 +50,7 @@ You could use STFT, Matching Pursuits, Wigner-Ville Transform, Wavelets,  or cEE
 
 ## Using `EsViT`
 
-See the original [README.md](https://github.com/microsoft/esvit)
+See the original [README.md](https://github.com/microsoft/esvit), you need to download the model (1.2 GB), see [models/README.md](models/README.md)
 
 ### Test first the pretrained model on your own data
 

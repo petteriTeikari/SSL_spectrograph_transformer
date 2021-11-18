@@ -1,0 +1,8 @@
+/ssl_spectro_venv/*
+/SpeechCommands/*
+/speech_commands_v0.02.tar.gz
+*.pyc
+/output/esvit_exp/ssl/swin_tiny_test_spectro_crap/check*.pth
+*.pth.tar
+/models/checkpoint_best.pth
+/.idea/*

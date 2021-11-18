@@ -67,8 +67,44 @@ cd esvit
 python -m torch.distributed.launch --nproc_per_node=1 eval_linear.py --data_path $DATA_PATH --output_dir $OUT_PATH/lincls/epoch0300 --pretrained_weights $CKPT_PATH --checkpoint_key teacher --batch_size_per_gpu 256 --arch swin_tiny --cfg experiments/imagenet/swin/swin_tiny_patch4_window7_224.yaml --n_last_blocks 4 --num_labels 5 MODEL.NUM_CLASSES 0
 ```
 
-### Train with your own data
+#### Results of the test
 
+As the data is just random spectrograms with no real labels, you don't expect to learn anything, but you can test for getting the code to run through
+
+```
+Max accuracy so far: 28.57%
+Epoch: [99]  [0/1]  eta: 0:00:00  lr: 0.000000  loss: 1.459668 (1.459668)  time: 0.730301  data: 0.626781  max mem: 705
+Epoch: [99] Total time: 0:00:00 (0.806385 s / it)
+Averaged stats: lr: 0.000000  loss: 1.459668 (1.459668)
+Test:  [0/1]  eta: 0:00:00  loss: 1.452319 (1.452319)  acc1: 28.571430 (28.571430)  acc5: 100.000008 (100.000008)  time: 0.724810  data: 0.620217  max mem: 705
+Test: Total time: 0:00:00 (0.799716 s / it)
+* Acc@1 28.571 Acc@5 100.000 loss 1.452
+Accuracy at epoch 99 of the network on the 28 test images: 28.6%
+Max accuracy so far: 28.57%
+Training of the supervised linear classifier on frozen features completed.
+Top-1 test accuracy: 28.6
+```
+
+### Train with the testing data
+
+See the original [README.md](https://github.com/microsoft/esvit#one-node-training)
+
+```
+PROJ_PATH=/home/petteri/PycharmProjects/SSL_spectro
+DATA_PATH=$PROJ_PATH/testdata_eval_spectrographs
+
+OUT_PATH=$PROJ_PATH/output/esvit_exp/ssl/swin_tiny_test_spectro_crap/
+python -m torch.distributed.launch --nproc_per_node=1 main_esvit.py --arch swin_tiny --data_path $DATA_PATH/train --output_dir $OUT_PATH --batch_size_per_gpu 2 --epochs 300 --teacher_temp 0.07 --warmup_epochs 10 --warmup_teacher_temp_epochs 30 --norm_last_layer false --use_dense_prediction True --cfg experiments/imagenet/swin/swin_tiny_patch4_window7_224.yaml 
+```
+
+![](imgs/garbage_Training.png)
+
+Depending on your GPU, the batch size has to be quite low for desktop debugging. Batch size of 4 was too much for my `Laptop 3070` with only 6 GB, so with 2 you got this to work. 
+
+If you are using NVIDIA A100, you can hike up the batch size up (40GB or 80GB per GPU awailable)
+
+![](imgs/A100_specs.png)
+_https://www.nvidia.com/en-us/data-center/a100/_
 
 
 

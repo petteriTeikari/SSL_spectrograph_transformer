@@ -7,7 +7,7 @@ pycocotools
 scikit-learn
 tensorwatch
 pandas
-timm==0.3.2
+timm==0.4.12
 numpy==1.19.3
 einops
 tqdm

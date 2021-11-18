@@ -8,7 +8,8 @@ https://paperswithcode.com/sota/self-supervised-image-classification-on
 
 ## Getting started with the repo
 
-Downloaded`esvit` as a .zip and added it as a static repo (you could have forked or made this as a submodule, now cloned)
+Downloaded`esvit` as a .zip and added it as a static repo 
+(you could have forked or made this as a submodule, now cloned)
 
 Set-up the `venv`:
 
@@ -19,7 +20,8 @@ pip install --upgrade pip
 pip install -r requirements.txt 
 ```
 
-Manual update now for the PyTorch that you have CUDA 11.x PyTorch so you can train/evaluate this on Ampere-generation NVIDIA GPUs (30xx, A100 on AWS, etc)
+Manual update now for the PyTorch that you have CUDA 11.x PyTorch 
+so you can train/evaluate this on Ampere-generation NVIDIA GPUs (30xx, A100 on AWS, etc)
 https://pytorch.org/
 
 ```
@@ -30,7 +32,7 @@ pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu
 
 ## Getting some sample data
 
-Easiest to get started with the Pytorch AUdio data, starting with this https://pytorch.org/tutorials/intermediate/speech_command_recognition_with_torchaudio.html
+Easiest to get started with the Pytorch Audio data, starting with this https://pytorch.org/tutorials/intermediate/speech_command_recognition_with_torchaudio.html
 
 ![spectrograph](imgs/voice_spectro.png)
 
@@ -50,7 +52,7 @@ You could use STFT, Matching Pursuits, Wigner-Ville Transform, Wavelets,  or cEE
 
 ## Using `EsViT`
 
-See the original [README.md](https://github.com/microsoft/esvit), you need to download the model (1.2 GB), see [models/README.md](models/README.md)
+See the original [README.md](https://github.com/microsoft/esvit), **you need to download the model (1.2 GB)** if you want to use the pretrained models for finetuning, see [models/README.md](models/README.md)
 
 ### Test first the pretrained model on your own data
 

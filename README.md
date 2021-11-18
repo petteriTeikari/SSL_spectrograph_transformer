@@ -20,8 +20,11 @@ Set-up the `venv`:
 python3.8 -m venv ssl_spectro_venv
 source ssl_spectro_venv/bin/activate
 pip install --upgrade pip
+pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 pip install -r requirements.txt 
 ```
+
+TODO! update the `requirements.txt` for PyTorch
 
 ## Getting some sample data
 
@@ -37,6 +40,9 @@ _https://paperswithcode.com/dataset/speech-commands_
 
 Input audio is as timeseries, we want to make it spectrograph 2D image (in case of audio, this is now time on _x_ and frequency on _y_, i.e. at what times is tour bassline in case with music)
 
+![](imgs/data_in_1D.png)
+
 You could use STFT, Matching Pursuits, Wigner-Ville Transform, Wavelets,  or cEEMD, etc., you have some options
 
 ![](imgs/timefreq.jpg)
+

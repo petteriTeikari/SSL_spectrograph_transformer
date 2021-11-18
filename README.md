@@ -2,6 +2,8 @@
 
 Based on the repo https://github.com/microsoft/esvit
 
+[![](imgs/efficient_transf.png)](https://chunyuan.li/assets/pdf/esvit_talk_chunyl.pdf)
+
 ![](imgs/esVit.png)
 https://paperswithcode.com/sota/self-supervised-image-classification-on
 -> https://paperswithcode.com/paper/efficient-self-supervised-vision-transformers
@@ -56,6 +58,8 @@ See the original [README.md](https://github.com/microsoft/esvit), **you need to 
 
 ### Test first the pretrained model on your own data
 
+[![](imgs/transfer_learning.png)](https://chunyuan.li/assets/pdf/esvit_talk_chunyl.pdf)
+
 Replace your project path, other paths are relative to the main path, `=1` with one GPU
 
 ```
@@ -90,6 +94,10 @@ Top-1 test accuracy: 28.6
 ### Train with the testing data
 
 See the original [README.md](https://github.com/microsoft/esvit#one-node-training)
+
+[![](imgs/transformer_variants.png)](https://chunyuan.li/assets/pdf/esvit_talk_chunyl.pdf)
+
+[![](imgs/big_CNNs.png)](https://arxiv.org/pdf/2106.09785.pdf)
 
 ```
 PROJ_PATH=/home/petteri/PycharmProjects/SSL_spectro
@@ -143,6 +151,8 @@ python analyze_models.py --arch swin_tiny --image_path $IMG_PATH --output_dir $O
 
 ##### Attention masks
 
+[![](imgs/why_SSL.png)](https://chunyuan.li/assets/pdf/esvit_talk_chunyl.pdf)
+
 Input image for visualization
 
 ![](imgs/img_for_attn_viz.png)
@@ -163,9 +173,11 @@ Check what these actually are :D
 
 ##### Correspondence
 
-Check out actually what these mean :D
-
 ![](imgs/correspondence0.png)
+
+See the [slides](https://chunyuan.li/assets/pdf/esvit_talk_chunyl.pdf) for quick explanation of this plot
+
+![](imgs/correspondence_slides.png)
 
 For the dataset:
 

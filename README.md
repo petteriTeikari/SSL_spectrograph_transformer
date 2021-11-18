@@ -139,7 +139,11 @@ SEED=0
 python analyze_models.py --arch swin_tiny --image_path $IMG_PATH --output_dir $OUT_PATH --pretrained_weights $CKPT_PATH --learning ssl --seed $SEED --cfg experiments/imagenet/swin/swin_tiny_patch4_window7_224.yaml --vis_attention True --vis_correspondence True MODEL.NUM_CLASSES 0 
 ```
 
-##### Ateention masks
+##### Attention masks
+
+Input image for visualization
+
+![](imgs/img_for_attn_viz.png)
 
 Check what these actually are :D
 

@@ -12,3 +12,4 @@ numpy==1.19.3
 einops
 tqdm
 loguru
+requests==2.26.0

@@ -99,6 +99,10 @@ python -m torch.distributed.launch --nproc_per_node=1 main_esvit.py --arch swin_
 
 ![](imgs/garbage_Training.png)
 
+![](imgs/garbage_Training2.png)
+
+Check out the saving frequency also, one model is ~900 MB and now it is saving every 5th epoch for the 300 epoch training (~60 GB)
+
 Depending on your GPU, the batch size has to be quite low for desktop debugging. Batch size of 4 was too much for my `Laptop 3070` with only 6 GB, so with 2 you got this to work. 
 
 If you are using NVIDIA A100, you can hike up the batch size up (40GB or 80GB per GPU awailable)
@@ -106,5 +110,66 @@ If you are using NVIDIA A100, you can hike up the batch size up (40GB or 80GB pe
 ![](imgs/A100_specs.png)
 _https://www.nvidia.com/en-us/data-center/a100/_
 
+#### Check the training log
 
+See [log.txt](utput/esvit_exp/ssl/swin_tiny_test_spectro_crap/log.txt)
 
+**TODO!** Add Tensorboard logging
+
+### Visualizing the network attention
+
+See original [README.md](https://github.com/microsoft/esvit#analysisvisualization-of-correspondence-and-attention-maps)
+
+Note! Classifier finetuning went to:
+`/home/petteri/PycharmProjects/SSL_spectro/exp_output/esvit_exp/swin/swin_tiny/bl_lr0.0005_gpu16_bs32_dense_multicrop_epoch300/lincls/epoch0300/checkpoint.pth.tar`
+
+Full training from scratch to:
+`/home/petteri/PycharmProjects/SSL_spectro/output/esvit_exp/ssl/swin_tiny_test_spectro_crap/checkpoint.pth`
+
+#### Single Image
+
+For a single image (note that the original README.md was not updated, use `analyze_models.py` instead of `run_analysis.py` that does not exist):
+
+```
+PROJ_PATH=/home/petteri/PycharmProjects/SSL_spectro
+IMG_PATH=$PROJ_PATH/testdata_eval_spectrographs/train/random_class1/potato_0.png
+OUT_PATH=$PROJ_PATH/output/esvit_exp/ssl/swin_tiny_test_spectro_crap/explanation/
+CKPT_PATH=$PROJ_PATH/exp_output/esvit_exp/swin/swin_tiny/bl_lr0.0005_gpu16_bs32_dense_multicrop_epoch300/lincls/epoch0300/checkpoint.pth.tar
+SEED=0
+python analyze_models.py --arch swin_tiny --image_path $IMG_PATH --output_dir $OUT_PATH --pretrained_weights $CKPT_PATH --learning ssl --seed $SEED --cfg experiments/imagenet/swin/swin_tiny_patch4_window7_224.yaml --vis_attention True --vis_correspondence True MODEL.NUM_CLASSES 0 
+```
+
+##### Ateention masks
+
+Check what these actually are :D
+
+`attn_all_11_query9.png`:
+
+![](imgs/attn_all_11_query9.png)
+
+`attn_masked_all_11_query9.png`:
+
+![](imgs/attn_masked_all_11_query9.png)
+
+`attn_masked_all_11_query9_compressed.png`:
+
+![](imgs/attn_masked_all_11_query9_compressed.png)
+
+##### Correspondence
+
+Check out actually what these mean :D
+
+![](imgs/correspondence0.png)
+
+For the dataset:
+
+```
+PROJ_PATH=/home/petteri/PycharmProjects/SSL_spectro
+DATA_PATH=$PROJ_PATH/testdata_eval_spectrographs/
+OUT_PATH=$PROJ_PATH/output/esvit_exp/ssl/swin_tiny_test_spectro_crap/explanation/
+CKPT_PATH=$PROJ_PATH/exp_output/esvit_exp/swin/swin_tiny/bl_lr0.0005_gpu16_bs32_dense_multicrop_epoch300/lincls/epoch0300/checkpoint.pth.tar
+SEED=0
+python analyze_models.py --arch swin_tiny --data_path $DATA_PATH --output_dir $OUT_PATH --pretrained_weights $CKPT_PATH --learning ssl --seed $SEED --cfg experiments/imagenet/swin/swin_tiny_patch4_window7_224.yaml  --measure_correspondence True MODEL.NUM_CLASSES 0 
+```
+
+Saves `measure_correspondence.pickle`

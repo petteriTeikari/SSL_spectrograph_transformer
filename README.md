@@ -128,6 +128,9 @@ See [log.txt](utput/esvit_exp/ssl/swin_tiny_test_spectro_crap/log.txt)
 
 ### Visualizing the network attention
 
+![](imgs/vit_CNN.jpeg)
+_[Raghu et al. (2021) "Do Vision Transformers See Like Convolutional Neural Networks?"](https://arxiv.org/abs/2108.08810)_
+
 See original [README.md](https://github.com/microsoft/esvit#analysisvisualization-of-correspondence-and-attention-maps)
 
 Note! Classifier finetuning went to:
@@ -208,24 +211,51 @@ Get time-frequency plots from any time series (audio, music, voice, EEG, ECG, an
 
 #### Line Spectra
 
-*
+* ?
 
 #### Hyperspectral Cubes
 
+You could just take line spectra from cubes (columns and rows)
+
 * **DiaRetDB2 spectral fundus image database (see [Fält et al. 2011](https://doi.org/10.2352/J.ImagingSci.Technol.2011.55.3.030509) and [Laaksonen 2016](https://lutpub.lut.fi/bitstream/handle/10024/123509/Lauri%20Laaksonen%20A4.pdf?sequence=2)):** Spectral channels were separated using 30 narrow bandpass interference filters in the visual range from 400 to 700 nm. A monochrome digital charge-coupled device camera was used as a detector. Using this system, spectral fundus images were recorded from 72 voluntary human subjects: 55 diabetic patients and 17 healthy control subjects.
 
- 
+* [Torbjørn Skaulia and Joyce Farrell (2013)](https://web.stanford.edu/~jefarrel/Publications/2010s/2013_HyperspectralImagingDatabase.pdf): "A collection of hyperspectral images for imaging systems research" - [Cited by 59](https://scholar.google.co.uk/scholar?hl=en&as_sdt=0%2C5&q=A+collection+of+hyperspectral+images+for+imaging+systems+research+&btnG=)   
 
 #### Time Series
 
+Transformers also for sensor (IoT) data, [Zhang et al 2021: Soft Sensing Transformer: Hundreds of Sensors are Worth a Single Word](https://arxiv.org/pdf/2111.05973.pdf)
+
 ##### Audio / Voice
+
+A lot of audio/voice available readily curated. But if you had like a startup doing voice-based analysis for AD, you could scrape the whole internet for whatever Yotuube video clips, and all the songs that you can?
+
+* https://towardsdatascience.com/a-data-lakes-worth-of-audio-datasets-b45b88cd4ad
+* https://towardsdatascience.com/40-open-source-audio-datasets-for-ml-59dc39d48f06
+* https://www.twine.net/blog/100-audio-and-video-datasets/
+* https://github.com/jim-schwoebel/voice_datasets
 
 ##### Biosignals
 
+* **[PhysioNet](https://physionet.org/about/database/)**
+* [Wagner et al. 2021 "PTB-XL, a large publicly available electrocardiography dataset"](https://doi.org/10.1038/s41597-020-0495-6) ECG
+* [Zhang et al. 2021: "Eegdenoisenet: A benchmark dataset for deep learning solutions of eeg denoising"](https://github.com/ncclabsustech/EEGdenoiseNet)
+
 ##### Stock Market
 
-##### Geophysics, astrophysics
+* [10 Best Stock Market Datasets for Machine Learning ](https://hackernoon.com/10-best-stock-market-datasets-for-machine-learning-e71437qm)
 
 ## Low-level fixes needed
 
-* Train directly using monochrome images instead of making spectrographs RGB to match the Github code from Microsoft
+* Train directly using **monochrome images** instead of making spectrographs RGB to match the Github code from Microsoft
+ 
+
+* Do the preprocessing better so you can get high-res spectrographs
+
+
+* Explore maybe some [CycleGANs](https://github.com/simontomaskarlsson/GAN-MRI) for doing the transformation from spectrograph-like to spectrograph images? Or do we just overfit again the generator?
+
+![](imgs/CycleGAN_T2_hist.gif)
+_CycleGAN - [T1](https://radiopaedia.org/articles/t1-weighted-image) to [T2](https://radiopaedia.org/articles/t2-weighted-image?lang=gb). Left: Input image. Middle: Synthetic images generated during training. Right: Ground truth. - https://github.com/simontomaskarlsson/GAN-MRI_
+
+
+* Try to actually understand the hyperparameters as well. Does the training really converge easily if you had signal in your dataset? Do we want to do some hyperparameter tuning? Or test this first with some smallish dataset (MNIST, or are there some small voice/audio datasets that are commonly used?) so that you get a sense on how the network behaves?

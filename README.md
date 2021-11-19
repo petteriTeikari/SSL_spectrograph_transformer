@@ -191,3 +191,41 @@ python analyze_models.py --arch swin_tiny --data_path $DATA_PATH --output_dir $O
 ```
 
 Saves `measure_correspondence.pickle`
+
+## What next?
+
+* **Get more training data** Do a proper search for available datasets, that could be similar to the spectrographs
+
+
+* **Explore time-frequency transforms** You could do multiple transformations. [STFT](https://pytorch.org/audio/stable/transforms.html) the fastest, but not very accurate; [Wavelets, PyCWT](https://pycwt.readthedocs.io/en/latest/), [Matching Pursuit](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.OrthogonalMatchingPursuit.html), [Wigner-Ville distribution, e.g. from the Time-Frequency Toolbox](https://tftb.readthedocs.io/en/latest/auto_examples/plot_4_1_3_chirps_wvd.html), [EEMD](https://bitbucket.org/luukko/libeemd/src/master/), etc. You could have multiple transforms all at once as data augmentations, or just pick one. Quantitative method for quantifying the "spectral spectrograph"-likeness of our time-frequency 2D images. 
+
+
+* **Would there be more light-weight** transformers, hybrid CNN-transformers, that would train even faster with good performance?
+
+### Dataset seeds
+
+Get time-frequency plots from any time series (audio, music, voice, EEG, ECG, any biosignals, stock markets), and get line spectra from hyperspectral cubes.
+
+#### Line Spectra
+
+*
+
+#### Hyperspectral Cubes
+
+* **DiaRetDB2 spectral fundus image database (see [Fält et al. 2011](https://doi.org/10.2352/J.ImagingSci.Technol.2011.55.3.030509) and [Laaksonen 2016](https://lutpub.lut.fi/bitstream/handle/10024/123509/Lauri%20Laaksonen%20A4.pdf?sequence=2)):** Spectral channels were separated using 30 narrow bandpass interference filters in the visual range from 400 to 700 nm. A monochrome digital charge-coupled device camera was used as a detector. Using this system, spectral fundus images were recorded from 72 voluntary human subjects: 55 diabetic patients and 17 healthy control subjects.
+
+ 
+
+#### Time Series
+
+##### Audio / Voice
+
+##### Biosignals
+
+##### Stock Market
+
+##### Geophysics, astrophysics
+
+## Low-level fixes needed
+
+* Train directly using monochrome images instead of making spectrographs RGB to match the Github code from Microsoft

@@ -1,5 +1,7 @@
 # SSL_transformer
 
+Quick test of SSL transformers for spectrograph (line spectra) data. You could potentially use a ton of different time-series data for pretraining if you are limited by the available spectrograph to train on
+
 Based on the repo https://github.com/microsoft/esvit
 
 [![](imgs/efficient_transf.png)](https://chunyuan.li/assets/pdf/esvit_talk_chunyl.pdf)
